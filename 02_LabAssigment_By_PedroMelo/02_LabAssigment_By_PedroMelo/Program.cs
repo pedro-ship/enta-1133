@@ -7,15 +7,8 @@ namespace _02_LabAssigment_By_PedroMelo {
             // creating instance gameManagerInstance
             GameManager gameManagerInstance = new GameManager();
 
-            // creating a loop to start the game
-            for (int x = 1; x <= 10; x++) {
-                Console.WriteLine("Press any Key to start the game!");
-                Console.ReadKey();
-                Console.WriteLine(" "); // blank space
-
-                // calling function GameStart
-                gameManagerInstance.GameStart();
-            }
+            // calling function GameStart
+            gameManagerInstance.GameStart();
         }
 
     }
