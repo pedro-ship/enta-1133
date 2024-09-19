@@ -8,7 +8,7 @@ namespace _02_LabAssigment_By_PedroMelo {
             GameManager gameManagerInstance = new GameManager();
 
             // calling function GameStart
-            gameManagerInstance.GameStart();
+            gameManagerInstance.Play();
         }
 
     }

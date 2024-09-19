@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 namespace _02_LabAssigment_By_PedroMelo.Scripts {
     internal class GameManager {
 
-        // Function of GameStart
-        public void GameStart() {
+        // Creating function Play
+        public void Play() {
             Intro();
             Description();
             GameLoop();
+            Research();
             End();
         }
 
@@ -26,11 +27,11 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
         // Function of GameLoop
         private void GameLoop() {
 
-            // creating instance DiceRollerInstance
-            DiceRoller diceRollerInstance = new DiceRoller();
+            // creating instance DieRollerInstance
+            DieRoller diceRollerInstance = new DieRoller();
 
-            // calling function RollDice
-            diceRollerInstance.RollDice();
+            // calling function Roll
+            diceRollerInstance.Roll();
 
             Console.WriteLine(" "); // blank space
         }
@@ -46,6 +47,20 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
             Console.WriteLine("|-------------------------------------------------------------------------------------------------------|");
             Console.WriteLine(" "); // blank space
         }
+
+        // Research message
+        private void Research() {
+            Console.WriteLine("Research and Explain");
+            Console.WriteLine(" + is Addition operator");
+            Console.WriteLine(" - is Subtraction operator");
+            Console.WriteLine(" / is Division operator");
+            Console.WriteLine(" * is Multiplication operator");
+            Console.WriteLine(" ++ is Increment operator");
+            Console.WriteLine(" -- is Decrement operator");
+            Console.WriteLine(" % is Modulus operator");
+
+            Console.WriteLine(" "); // Blank space
+            }
 
         // End message
         private void End() {
