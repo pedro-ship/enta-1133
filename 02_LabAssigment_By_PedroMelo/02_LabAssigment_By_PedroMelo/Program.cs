@@ -7,7 +7,7 @@ namespace _02_LabAssigment_By_PedroMelo {
             // creating instance gameManagerInstance
             GameManager gameManagerInstance = new GameManager();
 
-            // calling function GameStart
+            // calling function Play
             gameManagerInstance.Play();
         }
 

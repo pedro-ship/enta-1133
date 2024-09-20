@@ -11,12 +11,12 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
 
         public void Roll() {
 
-            // creating a loop to start the game and roll the dice
+            // creating a for loop to roll the dice when press any key
             for (int x = 1; x <= 3; x++) {
-                Console.WriteLine(" "); // blank space
-                Console.WriteLine("Press any Key to play!");
+                Console.WriteLine(); // blank space
+                Console.WriteLine("Press any Key to roll the dice four times!");
                 Console.ReadKey();
-                Console.WriteLine(" "); // blank space
+                Console.WriteLine(); // blank space
 
                 // calling function RandomNumber
                 RandomNumber();
@@ -49,7 +49,7 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
             Console.Write(c + " | ");
             Console.Write( d + " | ");
 
-            Console.WriteLine(" "); // blank space
+            Console.WriteLine(); // blank space
         }
 
         /* I DISABLED THIS BLOCK OF CODE BECAUSE THIS ASSIGNMENT IS SUPPOSED TO DO WITHOUT FOR LOOP
