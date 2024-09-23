@@ -24,6 +24,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of first round
         internal void FirstTurn() {
             string playerChooseDice = "";
+            user.score = 0;
+            cpu.score = 0;
 
             Console.WriteLine(); // blank space
             Console.WriteLine("FIRST ROUND:");
@@ -119,6 +121,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of second round
         internal void SecondTurn() {
             string playerChooseDice = "";
+            user.score = 0;
+            cpu.score = 0;
 
             Console.WriteLine(); // blank space
             Console.WriteLine("SECOND ROUND:");
@@ -214,6 +218,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of third round
         internal void ThirdTurn() {
             string playerChooseDice = "";
+            user.score = 0;
+            cpu.score = 0;
 
             Console.WriteLine(); // blank space
             Console.WriteLine("THIRD ROUND:");
@@ -309,6 +315,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of four round
         internal void FourTurn() {
             string playerChooseDice = "";
+            user.score = 0;
+            cpu.score = 0;
 
             Console.WriteLine(); // blank space
             Console.WriteLine("LAST ROUND:");
@@ -404,7 +412,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of Win or Lose
         internal void WinLose() {
             Console.WriteLine(); // blank space
-            Console.WriteLine("Your total score: " +userTotalScore);
+            Console.WriteLine("Your total score: " + userTotalScore);
             Console.WriteLine("Computer total score: " + cpuTotalScore);
 
             if (userTotalScore > cpuTotalScore) {

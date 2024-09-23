@@ -11,30 +11,30 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Creating Player instance
         Player playerInstance = new Player();
 
-        internal int sixSideDice = 6;
-        internal int eightSideDice = 8;
-        internal int twelveSideDice = 12;
-        internal int twentySideDice = 20;
+        internal int diceD6 = 6;
+        internal int diceD8 = 8;
+        internal int diceD12 = 12;
+        internal int diceD20 = 20;
 
         // Creating instance of Ramdom
         Random randomNumber = new Random();
 
         // creating the variables with random numbers
         internal int RollD6() {
-            int randomRoll = randomNumber.Next(1, sixSideDice + 1); // D6
-            return randomRoll;
+            int randomRoll6 = randomNumber.Next(1, diceD6 + 1); // D6
+            return randomRoll6;
         }
         internal int RollD8() {
-            int randomRoll = randomNumber.Next(1, eightSideDice + 1); // D8
-            return randomRoll;
+            int randomRoll8 = randomNumber.Next(1, diceD8 + 1); // D8
+            return randomRoll8;
         }
         internal int RollD12() {
-            int randomRoll = randomNumber.Next(1, twelveSideDice + 1); // D12
-            return randomRoll;
+            int randomRoll12 = randomNumber.Next(1, diceD12 + 1); // D12
+            return randomRoll12;
         }
         internal int RollD20() {
-            int randomRoll = randomNumber.Next(1, twentySideDice + 1); // D20
-            return randomRoll;
+            int randomRoll20 = randomNumber.Next(1, diceD20 + 1); // D20
+            return randomRoll20;
         }
 
 

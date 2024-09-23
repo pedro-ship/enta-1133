@@ -19,7 +19,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             Intro();
             PlayerWantsToPlay();
 
-            // 
+            // Just if the player wants to play to code will run
             if (playerBoolWantsToPlay) {
                 Description();
                 GameLoop();
@@ -31,7 +31,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             End();
         }
 
-        // GameLoop
+        // Function of the GameLoop
         internal void GameLoop() {
 
             gameRulesInstance.FirstTurn();
@@ -51,7 +51,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             Console.WriteLine("Hello " + playerName + " welcome to my game!");
         }
 
-        // Question player wants to play
+        // Question to know if the player wants to play
         internal void PlayerWantsToPlay() {
             Console.WriteLine("ASK: Do you want to play? (if yes: write <YES>)");
             playerStringWantsToPlay = Console.ReadLine().ToUpper();
