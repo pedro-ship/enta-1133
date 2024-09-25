@@ -34,10 +34,10 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Function of the GameLoop
         internal void GameLoop() {
 
-            gameRulesInstance.FirstTurn();
-            gameRulesInstance.SecondTurn();
-            gameRulesInstance.ThirdTurn();
-            gameRulesInstance.FourTurn();
+            gameRulesInstance.StartTurn();
+            gameRulesInstance.StartTurn();
+            gameRulesInstance.StartTurn();
+            gameRulesInstance.StartTurn();
             gameRulesInstance.WinLose();
         }
 

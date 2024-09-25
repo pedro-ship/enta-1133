@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace _03_LabAssigment_By_PedroMelo.Scripts {
     internal class GameRules {
+        string playerChooseDice = "";
         int userTotalScore = 0;
         int cpuTotalScore = 0;
         internal bool Dice6 = true;
@@ -17,13 +18,19 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         /// <summary>
         /// Creating the instances
         /// </summary>
-        DiceRoller diceRollerInstance = new DiceRoller(); // diceRollerInstance Instance
-        Player user = new Player(); // user Instance
-        Player cpu = new Player(); // cpu Instance
+        DiceRoller diceD6 = new DiceRoller(); // D6 Instance
+        DiceRoller diceD8 = new DiceRoller(); // D8 Instance
+        DiceRoller diceD12 = new DiceRoller(); // D12 Instance
+        DiceRoller diceD20 = new DiceRoller(); // D20 Instance
+        Player user = new Player(); // USER Instance
+        Player cpu = new Player(); // CPU Instance
 
-        // Function of first round
-        internal void FirstTurn() {
-            string playerChooseDice = "";
+        // Function of StartTurn
+        internal void StartTurn() {
+            diceD6.numberOfSides = 6;
+            diceD8.numberOfSides = 8;
+            diceD12.numberOfSides = 12;
+            diceD20.numberOfSides = 20;
             user.score = 0;
             cpu.score = 0;
 
@@ -36,8 +43,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             if (playerChooseDice == "6" && Dice6) {
                 Console.WriteLine(); // blank space
                 Console.WriteLine("Rolling the 6 sided dice...");
-                diceRollerInstance.RollScoreD6(ref user.score);
-                diceRollerInstance.RollScoreD6(ref cpu.score);
+                diceD6.RollScore(ref user.score);
+                diceD6.RollScore(ref cpu.score);
                 userTotalScore += user.score;
                 cpuTotalScore += cpu.score;
                 Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
@@ -45,7 +52,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
                 if (user.score > cpu.score) {
                     Console.WriteLine(); // blank space
                     Console.WriteLine("You won this round");
-                } 
+                }
                 else if (cpu.score >= user.score) {
                     Console.WriteLine(); // blank space
                     Console.WriteLine("You lost this round");
@@ -55,8 +62,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             else if (playerChooseDice == "8" && Dice8) {
                 Console.WriteLine(); // blank space
                 Console.WriteLine("Rolling the 8 sided dice...");
-                diceRollerInstance.RollScoreD8(ref user.score);
-                diceRollerInstance.RollScoreD8(ref cpu.score);
+                diceD8.RollScore(ref user.score);
+                diceD8.RollScore(ref cpu.score);
                 userTotalScore += user.score;
                 cpuTotalScore += cpu.score;
                 Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
@@ -74,8 +81,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             else if (playerChooseDice == "12" && Dice12) {
                 Console.WriteLine(); // blank space
                 Console.WriteLine("Rolling the 12 sided dice...");
-                diceRollerInstance.RollScoreD12(ref user.score);
-                diceRollerInstance.RollScoreD12(ref cpu.score);
+                diceD12.RollScore(ref user.score);
+                diceD12.RollScore(ref cpu.score);
                 userTotalScore += user.score;
                 cpuTotalScore += cpu.score;
                 Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
@@ -93,8 +100,8 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             else if (playerChooseDice == "20" && Dice20) {
                 Console.WriteLine(); // blank space
                 Console.WriteLine("Rolling the 20 sided dice...");
-                diceRollerInstance.RollScoreD20(ref user.score);
-                diceRollerInstance.RollScoreD20(ref cpu.score);
+                diceD20.RollScore(ref user.score);
+                diceD20.RollScore(ref cpu.score);
                 userTotalScore += user.score;
                 cpuTotalScore += cpu.score;
                 Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
@@ -113,298 +120,7 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
                 Console.WriteLine(); // blank space
                 Console.WriteLine("Select the number of side of the dice (6, 8, 12, 20)");
                 Console.WriteLine("And you can't select the same dice more than one time");
-                FirstTurn();
-            }
-
-        }
-
-        // Function of second round
-        internal void SecondTurn() {
-            string playerChooseDice = "";
-            user.score = 0;
-            cpu.score = 0;
-
-            Console.WriteLine(); // blank space
-            Console.WriteLine("SECOND ROUND:");
-            Console.WriteLine("Which dice you want to roll?");
-            Console.WriteLine("6 sides | 8 sides | 12 sides | 20 sides");
-            playerChooseDice = Console.ReadLine();
-
-            if (playerChooseDice == "6" && Dice6) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 6 sided dice...");
-                diceRollerInstance.RollScoreD6(ref user.score);
-                diceRollerInstance.RollScoreD6(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice6 = false;
-            }
-            else if (playerChooseDice == "8" && Dice8) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 8 sided dice...");
-                diceRollerInstance.RollScoreD8(ref user.score);
-                diceRollerInstance.RollScoreD8(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice8 = false;
-            }
-            else if (playerChooseDice == "12" && Dice12) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 12 sided dice...");
-                diceRollerInstance.RollScoreD12(ref user.score);
-                diceRollerInstance.RollScoreD12(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice12 = false;
-            }
-            else if (playerChooseDice == "20" && Dice20) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 20 sided dice...");
-                diceRollerInstance.RollScoreD20(ref user.score);
-                diceRollerInstance.RollScoreD20(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice20 = false;
-            }
-            else {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Select the number of side of the dice (6, 8, 12, 20)");
-                Console.WriteLine("And you can't select the same dice more than one time");
-                SecondTurn();
-            }
-
-        }
-
-        // Function of third round
-        internal void ThirdTurn() {
-            string playerChooseDice = "";
-            user.score = 0;
-            cpu.score = 0;
-
-            Console.WriteLine(); // blank space
-            Console.WriteLine("THIRD ROUND:");
-            Console.WriteLine("Which dice you want to roll?");
-            Console.WriteLine("6 sides | 8 sides | 12 sides | 20 sides");
-            playerChooseDice = Console.ReadLine();
-
-            if (playerChooseDice == "6" && Dice6) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 6 sided dice...");
-                diceRollerInstance.RollScoreD6(ref user.score);
-                diceRollerInstance.RollScoreD6(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice6 = false;
-            }
-            else if (playerChooseDice == "8" && Dice8) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 8 sided dice...");
-                diceRollerInstance.RollScoreD8(ref user.score);
-                diceRollerInstance.RollScoreD8(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice8 = false;
-            }
-            else if (playerChooseDice == "12" && Dice12) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 12 sided dice...");
-                diceRollerInstance.RollScoreD12(ref user.score);
-                diceRollerInstance.RollScoreD12(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice12 = false;
-            }
-            else if (playerChooseDice == "20" && Dice20) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 20 sided dice...");
-                diceRollerInstance.RollScoreD20(ref user.score);
-                diceRollerInstance.RollScoreD20(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice20 = false;
-            }
-            else {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Select the number of side of the dice (6, 8, 12, 20)");
-                Console.WriteLine("And you can't select the same dice more than one time");
-                SecondTurn();
-            }
-
-        }
-
-        // Function of four round
-        internal void FourTurn() {
-            string playerChooseDice = "";
-            user.score = 0;
-            cpu.score = 0;
-
-            Console.WriteLine(); // blank space
-            Console.WriteLine("LAST ROUND:");
-            Console.WriteLine("Which dice you want to roll?");
-            Console.WriteLine("6 sides | 8 sides | 12 sides | 20 sides");
-            playerChooseDice = Console.ReadLine();
-
-            if (playerChooseDice == "6" && Dice6) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 6 sided dice...");
-                diceRollerInstance.RollScoreD6(ref user.score);
-                diceRollerInstance.RollScoreD6(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice6 = false;
-            }
-            else if (playerChooseDice == "8" && Dice8) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 8 sided dice...");
-                diceRollerInstance.RollScoreD8(ref user.score);
-                diceRollerInstance.RollScoreD8(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice8 = false;
-            }
-            else if (playerChooseDice == "12" && Dice12) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 12 sided dice...");
-                diceRollerInstance.RollScoreD12(ref user.score);
-                diceRollerInstance.RollScoreD12(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice12 = false;
-            }
-            else if (playerChooseDice == "20" && Dice20) {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Rolling the 20 sided dice...");
-                diceRollerInstance.RollScoreD20(ref user.score);
-                diceRollerInstance.RollScoreD20(ref cpu.score);
-                userTotalScore += user.score;
-                cpuTotalScore += cpu.score;
-                Console.WriteLine("You Score: " + user.score + " | Computer Score: " + cpu.score);
-
-                if (user.score > cpu.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You won this round");
-                }
-                else if (cpu.score >= user.score) {
-                    Console.WriteLine(); // blank space
-                    Console.WriteLine("You lost this round");
-                }
-                Dice20 = false;
-            }
-            else {
-                Console.WriteLine(); // blank space
-                Console.WriteLine("Select the number of side of the dice (6, 8, 12, 20)");
-                Console.WriteLine("And you can't select the same dice more than one time");
-                SecondTurn();
+                StartTurn();
             }
 
         }
