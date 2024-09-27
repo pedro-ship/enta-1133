@@ -13,13 +13,13 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         // Creating instance of Ramdom
         Random randomNumber = new Random();
 
-        // Creating the variables with random numbers
+        // Creating the variable Roll that will generate a random number every time
         internal int Roll() {
             int randomRoll = randomNumber.Next(1, numberOfSides + 1);
             return randomRoll;
         }
 
-        // Creating the function to roll and score the number
+        // Creating the function RollScore that add variable Score + variable Roll
         internal void RollScore(ref int score) {
             score += Roll();
         }

@@ -4,10 +4,10 @@ namespace _03_LabAssigment_By_PedroMelo {
     internal class Program {
         static void Main(string[] args) {
 
-            // creating instance gameManagerInstance
+            // Creating instance of GameManager
             GameManager gameManagerInstance = new GameManager();
 
-            // calling the function Play
+            // Calling function Play
             gameManagerInstance.Play();
         }
     }

@@ -12,9 +12,10 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
         string playerStringWantsToPlay = "";
         internal bool playerBoolWantsToPlay = false;
 
-        // Creating the Instances
+        // Creating instance of GameRulles
         GameRules gameRulesInstance = new GameRules();
 
+        // Function Play
         public void Play() {
             Intro();
             PlayerWantsToPlay();
@@ -27,17 +28,20 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             else if (playerBoolWantsToPlay == false) {
                 Sorry();
             }
-
             End();
         }
 
-        // Function of the GameLoop
+        // Function GameLoop
         internal void GameLoop() {
 
-            gameRulesInstance.StartTurn();
-            gameRulesInstance.StartTurn();
-            gameRulesInstance.StartTurn();
-            gameRulesInstance.StartTurn();
+            Console.WriteLine("FIRST ROUND:");
+            gameRulesInstance.DecideTurn();
+            Console.WriteLine("SECOND ROUND:");
+            gameRulesInstance.UserPickDice();
+            Console.WriteLine("THIRD ROUND:");
+            gameRulesInstance.UserPickDice();
+            Console.WriteLine("FOUR ROUND:");
+            gameRulesInstance.UserPickDice();
             gameRulesInstance.WinLose();
         }
 
@@ -51,9 +55,9 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             Console.WriteLine("Hello " + playerName + " welcome to my game!");
         }
 
-        // Question to know if the player wants to play
+        // Function that will ask if the player wants to play
         internal void PlayerWantsToPlay() {
-            Console.WriteLine("ASK: Do you want to play? (if yes: write <YES>)");
+            Console.WriteLine("Do you want to play? (if yes: write <YES>)");
             playerStringWantsToPlay = Console.ReadLine().ToUpper();
 
             // Question player want to play ?
@@ -87,10 +91,17 @@ namespace _03_LabAssigment_By_PedroMelo.Scripts {
             Console.WriteLine("| After you roll the dice we will calculate who won the round.                   |");
             Console.WriteLine("| In the end the winner will be who has more round wins.                         |");
             Console.WriteLine("|--------------------------------------------------------------------------------|");
+            PressEnter();
 
-            // while the player dont press Enter the game wont start
-            Console.WriteLine("ASK: Did you understood the rules? (if yes press <ENTER>)");
-            while (Console.ReadKey().Key != ConsoleKey.Enter) {}
+            // Function that will keep the user in the loop while he don't pree the Key <Enter>
+            void PressEnter() {
+                Console.WriteLine("Did you understood the rules? (if yes press <ENTER>)");
+
+                if (Console.ReadKey().Key != ConsoleKey.Enter) {
+                    PressEnter();
+                }
+                Console.WriteLine(); // blank space
+            }
         }
 
         // Sorry message
