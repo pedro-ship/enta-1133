@@ -1,0 +1,85 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GD12_1133_A2_PedroMelo.Scripts {
+    public class Inventory {
+        public List<Item> InventoryList = new List<Item>();
+
+        // Function GetWeapon that add items of type weapon to the weaponList
+        public List<Weapon> GetWeapons() {
+            List<Weapon> weaponsList = new List<Weapon>(); // Create List of weaponList
+            // For each item in the InventoryList will run the code
+            foreach (Item item in InventoryList) {
+                // If the item is from Weapon class will be added to the weaponList
+                if (item is Weapon weapon) {
+                    weaponsList.Add(weapon);
+                }
+            }
+            return weaponsList;
+        }
+
+        Item RandomItem() {
+            // Create the Instance
+            Random random = new Random(); // random Instance
+
+            // Create a List that has probability of drop items
+            List<Item> itemList = new List<Item>();
+
+            // For loop that add 20 times "new HealPotion()" 20% of chance to be dropped
+            for (int i = 0; i < 20; i++) {
+                itemList.Add(new HealPotion());
+            }
+
+            // For loop that add 30 times "new Dagger()" 30% of chance to be dropped
+            for (int i = 0; i < 30; i++) {
+                itemList.Add(new Dagger());
+            }
+
+            // For loop that add 30 times "new LongSword()" 30% of chance to be dropped
+            for (int i = 0; i < 30; i++) {
+                itemList.Add(new LongSword());
+            }
+
+            // For loop that add 15 times "new LightSaber()" 15% of chance to be dropped
+            for (int i = 0; i < 15; i++) {
+                itemList.Add(new LightSaber());
+            }
+
+            // For loop that add 5 times "new SupermanPower()" 5% of chance to be dropped
+            for (int i = 0; i < 5; i++) {
+                itemList.Add(new SupermanPower());
+            }
+
+            return itemList[random.Next(itemList.Count)]; // return a random item of itemList
+        }
+
+        // Function AddItemToInventory
+        public void AddItemToInventory(ref string itemFound) {
+            Item item = RandomItem(); // Assign the RandomItem() to local variable "item"
+            InventoryList.Add(item); // Add RandomItem() to InventoryList
+            itemFound = item.ItemName; // Assign RandomItem().ItemName to itemFound
+        }
+
+        // Function CheckInventory
+        public void CheckInventory() {
+            // If InventoryList has one item or more run the code
+            if (InventoryList.Count > 0) {
+                Console.WriteLine(); // blank space
+                Console.WriteLine("Your inventory has:");
+                // For loop that is execute for each item in InventoryList
+                foreach (Item item in InventoryList) {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(item.ItemName);
+                    Console.ResetColor();
+                }
+            }
+            else {
+                Console.WriteLine("Your inventory is empty");
+            }
+        }
+
+    }
+}
