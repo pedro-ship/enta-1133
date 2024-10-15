@@ -14,6 +14,18 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Create instances
         public Inventory InventoryInstance = new Inventory(); // InventoryInstance Instance
 
+        // Function GetPlayerLife
+        public void GetPlayerLife() {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.Write(PlayerName);
+            Console.ResetColor();
+            Console.Write(" you have ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(PlayerLife);
+            Console.ResetColor();
+            Console.WriteLine(" life points");
+        }
+
         // Function TakeDamage
         public void TakeDamage(int damageTaken) {
             PlayerLife -= damageTaken;
@@ -31,11 +43,13 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function TakeHeal
         public void TakeHeal(int healTaken) {
             PlayerLife += healTaken;
-            if (PlayerLife > 50) { // If PlayerLife is greater than 50 the PlayerLife will be 50
+
+            // If PlayerLife is greater than 50 the PlayerLife will be 50
+            if (PlayerLife > 50) {
                 PlayerLife = 50;
             }
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"You healed {healTaken} life points. Current life: {PlayerLife}");
+            Console.WriteLine($"You healed {healTaken} life points");
             Console.WriteLine($"Now you have {PlayerLife} of life");
             Console.ResetColor();
         }

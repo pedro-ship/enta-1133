@@ -8,6 +8,18 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
     public class Inventory {
         public List<Item> InventoryList = new List<Item>();
 
+        public List<Consumable> GetConsumables() {
+            List<Consumable> consumablesList = new List<Consumable>(); // Create List of consumablesList
+            // For each item in the InventoryList will run the code
+            foreach (Item item in InventoryList) {
+                // If the item is from Consumable class will be added to the consumablesList
+                if (item is Consumable consumable) {
+                    consumablesList.Add(consumable);
+                }
+            }
+            return consumablesList;
+        }
+
         // Function GetWeapon that add items of type weapon to the weaponList
         public List<Weapon> GetWeapons() {
             List<Weapon> weaponsList = new List<Weapon>(); // Create List of weaponList
@@ -21,6 +33,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             return weaponsList;
         }
 
+        // Method that return a random item of itemList
         Item RandomItem() {
             // Create the Instance
             Random random = new Random(); // random Instance

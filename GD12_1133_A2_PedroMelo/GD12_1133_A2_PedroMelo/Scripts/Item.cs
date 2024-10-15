@@ -18,7 +18,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
     public abstract class Consumable : Item {
         public override bool IsUsable { get; } = true;
-        public abstract void GiveHeal(ref int healGiven);
+        public abstract int GiveHeal();
     }
 
     public class Dagger : Weapon {
@@ -59,9 +59,10 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
     public class HealPotion : Consumable {
         public override string ItemName { get; } = "Heal Potion";
-        public override void GiveHeal(ref int healGiven) {
+        public override int GiveHeal() {
             dice.NumberOfSides = 12;
-            healGiven = dice.Roll();
+            int healGiven = dice.Roll();
+            return healGiven;
         }
     }
 

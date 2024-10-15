@@ -17,7 +17,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         public void Intro() {
             // Display the intro message
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("|Coded by -->Pedro Melo<-- on 10/05/2024|");
+            Console.WriteLine("|Coded by -->Pedro Melo<-- on 10/12/2024|");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine
                 (" _   _      _ _ \r\n" +
@@ -54,7 +54,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             Console.WriteLine(); // blank space
             Console.WriteLine("Goodbye!");
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("|Coded by -->Pedro Melo<-- on10/05/2024|");
+            Console.WriteLine("|Coded by -->Pedro Melo<-- on10/12/2024|");
             Console.ResetColor();
         }
 

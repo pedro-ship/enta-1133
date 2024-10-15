@@ -59,6 +59,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         DiceRoller dice = new DiceRoller(); // dice Instance
         Random random = new Random(); // random Instance
 
+        // Method that return a random enemy of enemyList
         Enemy RandomEnemy() {
             // Create a List that has probability of select an enemy
             List<Enemy> enemyList = new List<Enemy>(); // List of enemies Instances
@@ -82,7 +83,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             for (int i = 0; i < 15; i++) {
                 enemyList.Add(new Batman());
             }
-            return enemyList[random.Next(enemyList.Count)];
+            return enemyList[random.Next(enemyList.Count)]; // Return a random enemy of enemyList
         }
         public override string roomName { get; } = "Combat Room";
 
@@ -164,18 +165,72 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function PlayerTurn
         void PlayerTurn(Enemy enemy) {
             // Check if the player has a weapon in the inventory
-            List<Weapon> weapons = GameManager.player.InventoryInstance.GetWeapons();
+            List<Weapon> weapons = GameManager.player.InventoryInstance.GetWeapons(); // List of weapons
+            List<Consumable> consumables = GameManager.player.InventoryInstance.GetConsumables(); // List of consumables
             Weapon selectedWeapon = null;
+            Consumable selectedConsumable = null;
 
+            int playerHeal = 0;
             int playerDamage = 0;
             int choice = 0;
             bool validChoice = false;
+            string userInput = "";
 
-            if (weapons.Count > 0) {
-                Console.WriteLine("Choose a weapon to attack with:");
-                for (int i = 0; i < weapons.Count; i++) {
+            // CODE HERE THE LOGIC OF HEAL THE PLAYER
+            // PLAYER CAN CHOOSE TO USE HEAL POTION IF THE LIFE IS LESS THAN 50
+            // REMOVE THE CONSUMABLE ITEM AFTER USE
+            // If loop to select the consumable
+            if (GameManager.player.PlayerLife < 50) {
+                GameManager.player.GetPlayerLife();
+                Console.WriteLine("Choose a consumable to use:");
+                for (int x = 0; x < consumables.Count; x++) {
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"{i + 1}: {weapons[i].ItemName}");
+                    Console.WriteLine($"{x + 1}: {consumables[x].ItemName}");
+                    Console.ResetColor();
+                }
+
+                // While loop that keep running the code while validChoice is false
+                while (validChoice != true && consumables.Count > 0) {
+                    Console.Write("Enter your choice: ");
+                    userInput = (Console.ReadLine() ?? "");
+                    // If player input is greater or equal 1 and the choice is less or equal the number of weapons in the List the variable validChoice is true
+                    if (int.TryParse(userInput, out choice) && choice >= 1 && choice <= weapons.Count + 1) {
+                        validChoice = true;
+                    }
+                    else {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("Invalid choice. Please press the number of the consumable");
+                        Console.ResetColor();
+                    }
+                }
+                if (choice <= consumables.Count) {
+                    selectedConsumable = consumables[choice - 1];
+                }
+                
+            }
+            
+            // If player don't have consumables in the inventory a heal of until 4 life points will be healed on player
+            if (selectedConsumable == null || (consumables.Count > 0 && choice == consumables.Count + 1)) {
+                Console.WriteLine("You have no consumables on your inventory the Gods will have mercy and will heal you a bit");
+                dice.NumberOfSides = 4; // Heal of Gods mercy
+                playerHeal = dice.Roll();
+                Console.WriteLine($"You healed {playerHeal} damage.");
+                GameManager.player.PlayerLife += playerHeal;
+            }
+            else {
+                // Call function GiveHeal
+                selectedConsumable.GiveHeal();
+                GameManager.player.PlayerLife += playerHeal;
+            }
+            
+            validChoice = false;
+
+            // If loop to choose the weapon
+            if (weapons.Count >= 0) {
+                Console.WriteLine("Choose a weapon to attack with:");
+                for (int x = 0; x < weapons.Count; x++) {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"{x + 1}: {weapons[x].ItemName}");
                     Console.ResetColor();
                 }
                 Console.WriteLine($"{weapons.Count + 1}: Fists");
@@ -183,7 +238,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                 // While loop that keep running the code while validChoice is false
                 while (validChoice != true) {
                     Console.Write("Enter your choice: ");
-                    string userInput = (Console.ReadLine() ?? "");
+                    userInput = (Console.ReadLine() ?? "");
                     // If player input is greater or equal 1 and the choice is less or equal the number of weapons in the List the variable validChoice is true
                     if (int.TryParse(userInput, out choice) && choice >= 1 && choice <= weapons.Count + 1) {
                         validChoice = true;
@@ -194,7 +249,6 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                         Console.ResetColor();
                     }
                 }
-
                 if (choice <= weapons.Count) {
                     selectedWeapon = weapons[choice - 1];
                 }
@@ -209,6 +263,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             }
             else {
                 Console.WriteLine($"You attack with your {selectedWeapon.ItemName}.");
+                // Call function WeaponDamage
                 selectedWeapon.WeaponDamage(ref playerDamage);
                 Console.WriteLine($"You deal {playerDamage} damage with your {selectedWeapon.ItemName}.");
             }
