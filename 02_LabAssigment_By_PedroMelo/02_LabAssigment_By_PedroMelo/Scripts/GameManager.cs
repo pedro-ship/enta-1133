@@ -59,10 +59,10 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
             Console.WriteLine(" * is Multiplication operator");
             Console.WriteLine(" ++ is Increment operator");
             Console.WriteLine(" -- is Decrement operator");
-            Console.WriteLine(" % is Modulus operator");
+            Console.WriteLine(" % is Modulus operator \n");
 
             Console.WriteLine(); // blank space
-            }
+        }
 
         // End message
         private void End() {

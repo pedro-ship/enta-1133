@@ -10,7 +10,27 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
         int totalScore = 0;
 
         public void Roll() {
+            
+            Console.WriteLine("Press <Enter> to star running the game");
+            while (Console.ReadKey().Key != ConsoleKey.Enter) {
+                Console.WriteLine(); // blank space
+                Console.WriteLine("Press any Key to roll the dice four times!");
+                Console.ReadKey();
+                Console.WriteLine(); // blank space
 
+                // calling function RandomNumber
+                RandomNumber();
+
+                // printing the totalScore
+                Console.WriteLine("Your total score is = " + totalScore);
+
+                // calling function WinLose
+                WinLose();
+                Console.WriteLine("Press <Enter> to stop running the game");
+            }
+            
+
+            /*
             // creating a for loop to roll the dice when press any key
             for (int x = 1; x <= 3; x++) {
                 Console.WriteLine(); // blank space
@@ -27,6 +47,7 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
                 // calling function WinLose
                 WinLose();
             }
+            */
         }
         
         private void RandomNumber() {
@@ -35,10 +56,10 @@ namespace _02_LabAssigment_By_PedroMelo.Scripts {
             Random rnd = new Random();
 
             // creating variable that will create random numbers
-            int a = rnd.Next(1, numberOfSides);
-            int b = rnd.Next(1, numberOfSides);
-            int c = rnd.Next(1, numberOfSides);
-            int d = rnd.Next(1, numberOfSides);
+            int a = rnd.Next(1, numberOfSides + 1);
+            int b = rnd.Next(1, numberOfSides + 1);
+            int c = rnd.Next(1, numberOfSides + 1);
+            int d = rnd.Next(1, numberOfSides + 1);
 
             // totalScore will calculate the variables a + b + c + d
             totalScore = a + b + c + d;
