@@ -11,6 +11,34 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         public int EnemyLife { get; set; }
         public abstract int Attack();
 
+        // Method that return a random enemy of enemyList
+        public static Enemy RandomEnemy() {
+            Random random = new Random();
+            // Create a List that has probability of select an enemy
+            List<Enemy> enemyList = new List<Enemy>(); // List of enemies Instances
+
+            // For loop that add 30 times "new Knight()" 30% of chance to be selected
+            for (int i = 0; i < 30; i++) {
+                enemyList.Add(new Knight());
+            }
+
+            // For loop that add 30 times "new Bear()" 30% of chance to be selected
+            for (int i = 0; i < 30; i++) {
+                enemyList.Add(new Bear());
+            }
+
+            // For loop that add 25 times "new WhiteSnow()" 25% of chance to be selected
+            for (int i = 0; i < 25; i++) {
+                enemyList.Add(new WhiteSnow());
+            }
+
+            // For loop that add 15 times "new Batman()" 15% of chance to be selected
+            for (int i = 0; i < 15; i++) {
+                enemyList.Add(new Batman());
+            }
+            return enemyList[random.Next(enemyList.Count)]; // Return a random enemy of enemyList
+        }
+
         // Method IsAlive return if enemy is alive
         public bool IsAlive() {
             if (EnemyLife > 0) {
