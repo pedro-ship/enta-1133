@@ -393,9 +393,10 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                     puzzlesTimes++;
                     Console.WriteLine("Your answer is wrong!");
                     Console.WriteLine("Do you want to try again ?");
-                    Console.WriteLine("Ask the puzzle here");
+                    Console.WriteLine("RIDDLE:");
+                    Console.WriteLine(puzzleList[index]);
                     puzzleAnswer = (Console.ReadLine() ?? "");
-                    if (puzzleAnswer == "thanks") {
+                    if (puzzleAnswer == puzzlesAnswerList[index]) {
                         Console.Write("Good job ");
                         Console.ForegroundColor = ConsoleColor.Blue;
                         Console.Write(GameManager.player.PlayerName);

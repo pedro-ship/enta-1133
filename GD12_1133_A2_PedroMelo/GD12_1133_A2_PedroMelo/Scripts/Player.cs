@@ -14,7 +14,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Create instances
         public Inventory InventoryInstance = new Inventory(); // InventoryInstance Instance
 
-        // Function GetPlayerLife
+        // Function GetPlayerLife that display the player's life
         public void GetPlayerLife() {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.Write(PlayerName);
