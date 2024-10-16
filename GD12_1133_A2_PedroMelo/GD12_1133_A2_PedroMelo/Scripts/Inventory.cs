@@ -8,31 +8,6 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
     public class Inventory {
         public List<Item> InventoryList = new List<Item>();
 
-        public List<Consumable> GetConsumables() {
-            List<Consumable> consumablesList = new List<Consumable>(); // Create List of consumablesList
-            // For each item in the InventoryList will run the code
-            foreach (Item item in InventoryList) {
-                // If the item is from Consumable class will be added to the consumablesList
-                if (item is Consumable consumable) {
-                    consumablesList.Add(consumable);
-                }
-            }
-            return consumablesList;
-        }
-
-        // Function GetWeapon that add items of type weapon to the weaponList
-        public List<Weapon> GetWeapons() {
-            List<Weapon> weaponsList = new List<Weapon>(); // Create List of weaponList
-            // For each item in the InventoryList will run the code
-            foreach (Item item in InventoryList) {
-                // If the item is from Weapon class will be added to the weaponList
-                if (item is Weapon weapon) {
-                    weaponsList.Add(weapon);
-                }
-            }
-            return weaponsList;
-        }
-
         // Method that return a random item of itemList
         Item RandomItem() {
             // Create the Instance
@@ -69,18 +44,19 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             return itemList[random.Next(itemList.Count)]; // return a random item of itemList
         }
 
-        // Function AddItemToInventory
+        // Function AddItemToInventory that add item to the inventory
         public void AddItemToInventory(ref string itemFound) {
             Item item = RandomItem(); // Assign the RandomItem() to local variable "item"
             InventoryList.Add(item); // Add RandomItem() to InventoryList
             itemFound = item.ItemName; // Assign RandomItem().ItemName to itemFound
         }
 
+        // Function RemoveItemOfInventory that remove item from the inventory
         public void RemoveItemOfInventory(Item item) {
             InventoryList.Remove(item);
         }
 
-        // Function CheckInventory
+        // Function CheckInventory that check the inventory
         public void CheckInventory() {
             // If InventoryList has one item or more run the code
             if (InventoryList.Count > 0) {
@@ -96,6 +72,32 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             else {
                 Console.WriteLine("Your inventory is empty");
             }
+        }
+
+        // Function GetWeapon that add items of type weapon to the weaponList
+        public List<Weapon> GetWeapons() {
+            List<Weapon> weaponsList = new List<Weapon>(); // Create List of weaponsList
+            // For each item in the InventoryList will run the code
+            foreach (Item item in InventoryList) {
+                // If the item is from Weapon class will be added to the weaponList
+                if (item is Weapon weapon) {
+                    weaponsList.Add(weapon);
+                }
+            }
+            return weaponsList;
+        }
+
+        // Function GetConsumables that add items of type consumables to the consumablesList
+        public List<Consumable> GetConsumables() {
+            List<Consumable> consumablesList = new List<Consumable>(); // Create List of consumablesList
+            // For each item in the InventoryList will run the code
+            foreach (Item item in InventoryList) {
+                // If the item is from Consumable class will be added to the consumablesList
+                if (item is Consumable consumable) {
+                    consumablesList.Add(consumable);
+                }
+            }
+            return consumablesList;
         }
 
     }

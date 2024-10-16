@@ -27,7 +27,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         }
 
         // Function CreateGrid
-        void CreateGrid() {
+        private void CreateGrid() {
             // Create the grid instances and assign to a random room of roomList
             grid[0, 2] = roomList[random.Next(roomList.Count)]; // Top left
             grid[1, 2] = roomList[random.Next(roomList.Count)]; // Top mid
@@ -52,7 +52,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             string optionAnswer = "";
             string directionAnswer = "";
 
-            // Call the function CreateGrid
+            // Call function CreateGrid to create the grid
             CreateGrid();
 
             // While loop that keep running while the variable "gameIsActive" = true
@@ -67,7 +67,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                     Console.WriteLine("Select one the options:");
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("1: Move to other room");
-                    Console.WriteLine("2: Search in your room");
+                    Console.WriteLine("2: Search current room");
                     Console.WriteLine("3: Check inventory");
                     Console.WriteLine("4: Check life points");
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -167,7 +167,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                             }
                             break;
 
-                        case "2": // Option "2" search room
+                        case "2": // Option "2" search current room
                                   // Call function OnRoomSearched
                             grid[playerX, playerY].OnRoomSearched();
                             break;
@@ -226,6 +226,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                             newPlayerX = playerX;
                             newPlayerY = playerY;
 
+                            // Call function CreateGrid to recreate the grid
                             CreateGrid();
                             break;
 

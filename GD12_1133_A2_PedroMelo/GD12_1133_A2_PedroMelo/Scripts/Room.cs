@@ -139,16 +139,23 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                             EnemyTurn(enemy);
                         }
 
-                        // If loop that display the winner
-                        if (enemy.IsAlive() == false) { // Player won
+                        // If loop to display the winner
+                        if (enemy.IsAlive() == false) { // PLAYER WON
+                            Console.WriteLine(); // blank space
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.Write("You won the combat and killed the ");
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine(enemy.EnemyName);
                             Console.ResetColor();
+                            // Call function AddItemToInventory
+                            GameManager.player.InventoryInstance.AddItemToInventory(ref itemFound);
+                            Console.Write("Here is your reward: ");
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(itemFound);
+                            Console.ResetColor();
                             doesPlayerWon = true;
                         }
-                        else if (GameManager.player.IsPlayerAlive != true) { // Player lost
+                        else if (GameManager.player.IsPlayerAlive != true) { // PLAYER LOST
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("You lost the combat!");
                             Console.ResetColor();
@@ -176,22 +183,22 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         // Function PlayerTurn
         void PlayerTurn(Enemy enemy) {
-            // Check if the player has a weapon in the inventory
-            List<Weapon> weapons = GameManager.player.InventoryInstance.GetWeapons(); // List of weapons
-            List<Consumable> consumables = GameManager.player.InventoryInstance.GetConsumables(); // List of consumables
-            Weapon selectedWeapon = null;
-            Consumable selectedConsumable = null;
-
             int playerHeal = 0;
             int playerDamage = 0;
             int choice = 0;
             bool validChoice = false;
             string userInput = "";
 
+            // Check if the player has a weapon in the inventory
+            List<Weapon> weapons = GameManager.player.InventoryInstance.GetWeapons(); // List of weapons
+            List<Consumable> consumables = GameManager.player.InventoryInstance.GetConsumables(); // List of consumables
+            Weapon selectedWeapon = null;
+            Consumable selectedConsumable = null;
+
             // If loop to select the consumable
             if (GameManager.player.PlayerLife < 40) {
-                GameManager.player.GetPlayerLife();
                 Console.WriteLine(); // blank space
+                GameManager.player.GetPlayerLife(); // Display player's life
                 Console.WriteLine("Choose a consumable to use:");
                 for (int x = 0; x < consumables.Count; x++) {
                     Console.ForegroundColor = ConsoleColor.Yellow;
@@ -233,22 +240,19 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                 Console.Write(playerHeal);
                 Console.ResetColor();
                 Console.WriteLine(" life points");
-                GameManager.player.GetPlayerLife();
-                Console.WriteLine(); // blank space
             }
             else if (selectedConsumable != null && GameManager.player.PlayerLife < 40) {
                 // Call function GiveHeal
                 playerHeal = selectedConsumable.GiveHeal();
                 GameManager.player.PlayerLife += playerHeal;
                 Console.WriteLine(); // blank space
-                Console.WriteLine($"You used the {selectedConsumable}");
+                Console.WriteLine($"You used the {selectedConsumable.ItemName}");
                 Console.Write("You healed ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(playerHeal);
                 Console.ResetColor();
                 Console.WriteLine(" life points");
-                GameManager.player.GetPlayerLife();
-                Console.WriteLine($"The {selectedConsumable} has been removed of you inventory");
+                Console.WriteLine($"The {selectedConsumable.ItemName} has been removed of you inventory");
                 Console.WriteLine(); // blank space
                 // Call function RemoveItemOfInventory
                 GameManager.player.InventoryInstance.RemoveItemOfInventory(selectedConsumable);
@@ -257,6 +261,8 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
             // If loop to choose the weapon
             if (weapons.Count >= 0) {
+                Console.WriteLine(); // blank space
+                GameManager.player.GetPlayerLife(); // Display player's life
                 Console.WriteLine("Choose a weapon:");
                 for (int x = 0; x < weapons.Count; x++) {
                     Console.ForegroundColor = ConsoleColor.Yellow;

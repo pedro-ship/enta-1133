@@ -40,8 +40,8 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             Console.WriteLine("|--------------------------------------------------------------------------------|");
             Console.WriteLine("| First welcome to the game \"Cursed Rooms\"                                       |");
             Console.WriteLine("| On this game you can explore the rooms in a 3x3 grid                           |");
-            Console.WriteLine("| There are 3 kind of room: Treasure, Puzzle and Combat:                         |");
-            Console.WriteLine("| Treasure: You can freely search in the room for 3 times                        |");
+            Console.WriteLine("| There are 3 kinds of rooms: Treasure, Puzzle and Combat                        |");
+            Console.WriteLine("| Treasure: You can freely search in the room 3 times                            |");
             Console.WriteLine("| Puzzle: you can try to solve the puzzle and then be able to search in the room |");
             Console.WriteLine("| Combat: You select a found weapon and fight against the enemy                  |");
             Console.WriteLine("|--------------------------------------------------------------------------------|");
