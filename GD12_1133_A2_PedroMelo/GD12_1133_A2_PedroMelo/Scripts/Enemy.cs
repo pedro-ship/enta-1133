@@ -6,22 +6,35 @@ using System.Threading.Tasks;
 
 namespace GD12_1133_A2_PedroMelo.Scripts {
     public abstract class Enemy {
-        public DiceRoller dice = new DiceRoller();
-        public int EnemyLife { get; set; }
+        internal DiceRoller dice = new DiceRoller();
         public abstract string EnemyName { get; }
-        public abstract void TakeDamage(int damageTaken);
-        public virtual int Attack() {
-            return dice.Roll();
+        public int EnemyLife { get; set; }
+        public abstract int Attack();
+
+        // Method IsAlive return if enemy is alive
+        public bool IsAlive() {
+            if (EnemyLife > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        // Create function TakeDamage that deals the damage on the enemy
+        public void TakeDamage(int damageTaken) {
+            EnemyLife -= damageTaken;
+
+            // If loop that reassign the EnemyLife to 0 if the EnemyLife is less or equal 0
+            if (EnemyLife <= 0) {
+                EnemyLife = 0;
+            }
+            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
         }
 
         // Constructor initializes enemies life
         protected Enemy(int initialLife) {
-            EnemyLife = initialLife;
-        }
-
-        // Method IsAlive check is enemy is alive
-        public bool IsAlive() {
-            return EnemyLife > 0;
+            EnemyLife = initialLife; // Assign initialLife to EnemyLife
         }
     }
 
@@ -30,16 +43,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         public Knight() : base(30) { } // Class Knight initializes with 30 life points
 
-        // Function TakeDamage
-        public override void TakeDamage(int damageTaken) {
-            EnemyLife -= damageTaken;
-            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
-            if (EnemyLife <= 0) {
-                EnemyLife = 0;
-            }
-        }
-
-        // Function Attack
+        // Method Attack return the random value of method Attack
         public override int Attack() {
             dice.NumberOfSides = 10;
             int attackDamage = dice.Roll();
@@ -53,16 +57,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         public Bear() : base(35) { } // Class Bear initializes with 35 life points
 
-        // Function TakeDamage
-        public override void TakeDamage(int damageTaken) {
-            EnemyLife -= damageTaken;
-            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
-            if (EnemyLife <= 0) {
-                EnemyLife = 0;
-            }
-        }
-
-        // Function Attack
+        // Method Attack return the random value of method Attack
         public override int Attack() {
             dice.NumberOfSides = 14;
             int attackDamage = dice.Roll();
@@ -76,16 +71,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         public WhiteSnow() : base(40) { } // Class WhiteSnow initializes with 40 life points
 
-        // Function TakeDamage
-        public override void TakeDamage(int damageTaken) {
-            EnemyLife -= damageTaken;
-            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
-            if (EnemyLife <= 0) {
-                EnemyLife = 0;
-            }
-        }
-
-        // Function Attack
+        // Method Attack return the random value of method Attack
         public override int Attack() {
             dice.NumberOfSides = 16;
             int attackDamage = dice.Roll();
@@ -99,16 +85,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         public Batman() : base(60) { } // Class Batman initializes with 50 life points
 
-        // Function TakeDamage
-        public override void TakeDamage(int damageTaken) {
-            EnemyLife -= damageTaken;
-            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
-            if (EnemyLife <= 0) {
-                EnemyLife = 0;
-            }
-        }
-
-        // Function Attack
+        // Method Attack return the random value of method Attack
         public override int Attack() {
             dice.NumberOfSides = 25;
             int attackDamage = dice.Roll();

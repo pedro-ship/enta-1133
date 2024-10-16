@@ -37,8 +37,11 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             }
         }
 
-        public void ResetPlayerLife() {
+        // Function ResetPlayerStats that reset the player's life and player's inventory
+        public void ResetPlayerStats() {
             PlayerLife = 40;
+            IsPlayerAlive = true;
+            InventoryInstance.InventoryList.Clear();
         }
         
     }

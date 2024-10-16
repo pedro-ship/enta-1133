@@ -218,14 +218,17 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                     switch (optionAnswer) {
                         case "y":
                         case "yes":
-                            player.ResetPlayerLife();
-                            player.IsPlayerAlive = true;
+                            // Display message
+                            Console.WriteLine(); // blank space
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("GAME RESTARTED");
+                            Console.ResetColor();
 
+                            // Reassign playerX and playerY to reset player's location on the grid
                             playerX = 1;
                             playerY = 1;
-                            newPlayerX = playerX;
-                            newPlayerY = playerY;
-
+                            // Call function ResetPlayerStats that reset the InventoryList, PlayerLife and IsPlayerAlive
+                            player.ResetPlayerStats();
                             // Call function CreateGrid to recreate the grid
                             CreateGrid();
                             break;
