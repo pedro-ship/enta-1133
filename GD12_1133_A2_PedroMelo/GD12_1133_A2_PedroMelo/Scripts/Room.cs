@@ -115,30 +115,42 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                         userWantsToFight = true;
                         // Choose a random enemy
                         Enemy enemy = RandomEnemy();
-                        Console.WriteLine($"You are fighting against a {enemy.EnemyName}");
-                        Console.WriteLine($"The {enemy.EnemyName} has {enemy.EnemyLife} life points.");
+                        // Display message of which enemy the player is fighting against
+                        Console.Write($"You are fighting against the ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(enemy.EnemyName);
+                        Console.Write(enemy.EnemyName);
+                        Console.ResetColor();
+                        Console.Write(" has ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write(enemy.EnemyLife);
+                        Console.ResetColor();
+                        Console.WriteLine(" life points");
                         Console.WriteLine(); // blank space
 
                         // Combat loop that runs while player and enemy are alive
                         while (GameManager.player.IsPlayerAlive && enemy.IsAlive()) {
-                            PlayerTurn(enemy); // Player Turn
-                            // If enemy.IsAlive is false the loop stop
+                            // Call function PlayerTurn
+                            PlayerTurn(enemy);
+                            // If enemy is not alive the loop stop
                             if (enemy.IsAlive() != true)
                                 break;
-
-                            EnemyTurn(enemy); // Enemy Turn
+                            // Call function EnemyTurn
+                            EnemyTurn(enemy);
                         }
 
                         // If loop that display the winner
                         if (enemy.IsAlive() == false) { // Player won
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"You defeated the enemy {enemy.EnemyName}!");
+                            Console.Write("You won the combat and killed the ");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(enemy.EnemyName);
                             Console.ResetColor();
                             doesPlayerWon = true;
                         }
                         else if (GameManager.player.IsPlayerAlive != true) { // Player lost
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("You have lost the combat!");
+                            Console.WriteLine("You lost the combat!");
                             Console.ResetColor();
                             doesPlayerWon = false;
                         }
@@ -176,21 +188,20 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             bool validChoice = false;
             string userInput = "";
 
-            // CODE HERE THE LOGIC OF HEAL THE PLAYER
-            // PLAYER CAN CHOOSE TO USE HEAL POTION IF THE LIFE IS LESS THAN 50
-            // REMOVE THE CONSUMABLE ITEM AFTER USE
             // If loop to select the consumable
-            if (GameManager.player.PlayerLife < 50) {
+            if (GameManager.player.PlayerLife < 40) {
                 GameManager.player.GetPlayerLife();
+                Console.WriteLine(); // blank space
                 Console.WriteLine("Choose a consumable to use:");
                 for (int x = 0; x < consumables.Count; x++) {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"{x + 1}: {consumables[x].ItemName}");
                     Console.ResetColor();
                 }
+                Console.WriteLine($"{consumables.Count + 1}: God's mercy");
 
                 // While loop that keep running the code while validChoice is false
-                while (validChoice != true && consumables.Count > 0) {
+                while (validChoice != true) {
                     Console.Write("Enter your choice: ");
                     userInput = (Console.ReadLine() ?? "");
                     // If player input is greater or equal 1 and the choice is less or equal the number of weapons in the List the variable validChoice is true
@@ -203,31 +214,50 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                         Console.ResetColor();
                     }
                 }
-                if (choice <= consumables.Count) {
-                    selectedConsumable = consumables[choice - 1];
+                // If choice is less or equal the amount of consumables will run the code
+                if (choice <= consumables.Count && consumables.Count > 0) {
+                    selectedConsumable = consumables[choice - 1]; // Assign the consumables[choice - 1] to selectedConsumable
                 }
                 
             }
-            
-            // If player don't have consumables in the inventory a heal of until 4 life points will be healed on player
-            if (selectedConsumable == null || (consumables.Count > 0 && choice == consumables.Count + 1)) {
-                Console.WriteLine("You have no consumables on your inventory the Gods will have mercy and will heal you a bit");
+
+            // If player don't have consumables in the inventory the player will receive a heal of until 4 life points
+            if (selectedConsumable == null && GameManager.player.PlayerLife < 40) {
+                Console.WriteLine(); // blank space
+                Console.WriteLine("The God's will have mercy and will heal you a bit");
                 dice.NumberOfSides = 4; // Heal of Gods mercy
                 playerHeal = dice.Roll();
-                Console.WriteLine($"You healed {playerHeal} damage.");
                 GameManager.player.PlayerLife += playerHeal;
+                Console.Write("You healed ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(playerHeal);
+                Console.ResetColor();
+                Console.WriteLine(" life points");
+                GameManager.player.GetPlayerLife();
+                Console.WriteLine(); // blank space
             }
-            else {
+            else if (selectedConsumable != null && GameManager.player.PlayerLife < 40) {
                 // Call function GiveHeal
-                selectedConsumable.GiveHeal();
+                playerHeal = selectedConsumable.GiveHeal();
                 GameManager.player.PlayerLife += playerHeal;
+                Console.WriteLine(); // blank space
+                Console.WriteLine($"You used the {selectedConsumable}");
+                Console.Write("You healed ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(playerHeal);
+                Console.ResetColor();
+                Console.WriteLine(" life points");
+                GameManager.player.GetPlayerLife();
+                Console.WriteLine($"The {selectedConsumable} has been removed of you inventory");
+                Console.WriteLine(); // blank space
+                // Call function RemoveItemOfInventory
+                GameManager.player.InventoryInstance.RemoveItemOfInventory(selectedConsumable);
             }
-            
             validChoice = false;
 
             // If loop to choose the weapon
             if (weapons.Count >= 0) {
-                Console.WriteLine("Choose a weapon to attack with:");
+                Console.WriteLine("Choose a weapon:");
                 for (int x = 0; x < weapons.Count; x++) {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine($"{x + 1}: {weapons[x].ItemName}");
@@ -249,19 +279,28 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
                         Console.ResetColor();
                     }
                 }
+                // If choice is less or equal the amount of weapons will run the code
                 if (choice <= weapons.Count) {
-                    selectedWeapon = weapons[choice - 1];
+                    selectedWeapon = weapons[choice - 1]; // Assign the weapons[choice - 1] to selectedWeapon
                 }
             }
 
             // If player don't have weapon in the inventory the player will fight with the hands
             if (selectedWeapon == null || (weapons.Count > 0 && choice == weapons.Count + 1)) {
-                Console.WriteLine("You have no weapons or chose to attack with your fists.");
-                dice.NumberOfSides = 4; // Damage fighting with hands
+                Console.WriteLine(); // blank space
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("FIGHT:");
+                Console.ResetColor();
+                Console.WriteLine("You chose to attack with your fists.");
+                dice.NumberOfSides = 4; // Damage attacking with Fist
                 playerDamage = dice.Roll();
                 Console.WriteLine($"You attack with your fists and deal {playerDamage} damage.");
             }
             else {
+                Console.WriteLine(); // blank space
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("FIGHT:");
+                Console.ResetColor();
                 Console.WriteLine($"You attack with your {selectedWeapon.ItemName}.");
                 // Call function WeaponDamage
                 selectedWeapon.WeaponDamage(ref playerDamage);
@@ -273,12 +312,9 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
 
         //Function EnemyTurn
         void EnemyTurn(Enemy enemy) {
-            int enemyDamage = enemy.Attack();
+            int enemyDamage = enemy.Attack(); // Assign enemy.Attack to enemyDamage
+            // Call function player.TakeDamage
             GameManager.player.TakeDamage(enemyDamage);
-
-            // Display player's life
-            Console.WriteLine($"You have {GameManager.player.PlayerLife} life points remaining.");
-            Console.WriteLine(); // blank space
         }
 
         public override void OnRoomSearched() {

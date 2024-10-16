@@ -67,5 +67,3 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
     }
 
 }
-
-// RECHECK TO CHANGE THE WRITES

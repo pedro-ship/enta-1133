@@ -33,20 +33,17 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function TakeDamage
         public override void TakeDamage(int damageTaken) {
             EnemyLife -= damageTaken;
-            Console.WriteLine($"The {EnemyName} takes {damageTaken} damage. Remaining life: {EnemyLife}");
+            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
             if (EnemyLife <= 0) {
                 EnemyLife = 0;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The {EnemyName} has been defeated!");
-                Console.ResetColor();
             }
         }
 
         // Function Attack
         public override int Attack() {
-            dice.NumberOfSides = 6;
+            dice.NumberOfSides = 10;
             int attackDamage = dice.Roll();
-            Console.WriteLine($"The {EnemyName} attacks and deals {attackDamage} damage to you.");
+            Console.WriteLine($"{EnemyName} attacked and deals {attackDamage} damage to you.");
             return attackDamage;
         }
     }
@@ -59,20 +56,17 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function TakeDamage
         public override void TakeDamage(int damageTaken) {
             EnemyLife -= damageTaken;
-            Console.WriteLine($"The {EnemyName} takes {damageTaken} damage. Remaining life: {EnemyLife}");
+            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
             if (EnemyLife <= 0) {
                 EnemyLife = 0;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The {EnemyName} has been defeated!");
-                Console.ResetColor();
             }
         }
 
         // Function Attack
         public override int Attack() {
-            dice.NumberOfSides = 8;
+            dice.NumberOfSides = 14;
             int attackDamage = dice.Roll();
-            Console.WriteLine($"The {EnemyName} attacks and deals {attackDamage} damage to you.");
+            Console.WriteLine($"{EnemyName} bitted you and deals {attackDamage} damage to you.");
             return attackDamage;
         }
     }
@@ -85,20 +79,17 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function TakeDamage
         public override void TakeDamage(int damageTaken) {
             EnemyLife -= damageTaken;
-            Console.WriteLine($"The {EnemyName} takes {damageTaken} damage. Remaining life: {EnemyLife}");
+            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
             if (EnemyLife <= 0) {
                 EnemyLife = 0;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The {EnemyName} has been defeated!");
-                Console.ResetColor();
             }
         }
 
         // Function Attack
         public override int Attack() {
-            dice.NumberOfSides = 12;
+            dice.NumberOfSides = 16;
             int attackDamage = dice.Roll();
-            Console.WriteLine($"The {EnemyName} attacks and deals {attackDamage} damage to you.");
+            Console.WriteLine($"{EnemyName} poisoned you and deals {attackDamage} damage to you.");
             return attackDamage;
         }
     }
@@ -111,24 +102,19 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         // Function TakeDamage
         public override void TakeDamage(int damageTaken) {
             EnemyLife -= damageTaken;
-            Console.WriteLine($"The {EnemyName} takes {damageTaken} damage. Remaining life: {EnemyLife}");
+            Console.WriteLine($"{EnemyName} takes {damageTaken} damage. {EnemyName} has: {EnemyLife} life points");
             if (EnemyLife <= 0) {
                 EnemyLife = 0;
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"The {EnemyName} has been defeated!");
-                Console.ResetColor();
             }
         }
 
         // Function Attack
         public override int Attack() {
-            dice.NumberOfSides = 20;
+            dice.NumberOfSides = 25;
             int attackDamage = dice.Roll();
-            Console.WriteLine($"The {EnemyName} attacks and deals {attackDamage} damage to you.");
+            Console.WriteLine($"{EnemyName} threw a boomerang in you and deals {attackDamage} damage to you.");
             return attackDamage;
         }
     }
 
 }
-
-// RECHECK TO CHANGE THE WRITES

@@ -8,7 +8,7 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
     public class Player {
         public string PlayerName = "";
         public int PlayerScore = 0;
-        public int PlayerLife = 50;
+        public int PlayerLife = 40;
         public bool IsPlayerAlive = true;
 
         // Create instances
@@ -30,30 +30,16 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
         public void TakeDamage(int damageTaken) {
             PlayerLife -= damageTaken;
 
-            if (PlayerLife <= 0) { // If PlayerLife is less or equal 0 the Player is dead
+            // If PlayerLife is less or equal 0 the Player is dead
+            if (PlayerLife <= 0) {
                 IsPlayerAlive = false;
                 PlayerLife = 0;
-                Console.WriteLine(); // blank space
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("!! GAME OVER !!");
-                Console.ResetColor();
             }
         }
 
-        // Function TakeHeal
-        public void TakeHeal(int healTaken) {
-            PlayerLife += healTaken;
-
-            // If PlayerLife is greater than 50 the PlayerLife will be 50
-            if (PlayerLife > 50) {
-                PlayerLife = 50;
-            }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"You healed {healTaken} life points");
-            Console.WriteLine($"Now you have {PlayerLife} of life");
-            Console.ResetColor();
+        public void ResetPlayerLife() {
+            PlayerLife = 40;
         }
+        
     }
 }
-
-// RECHECK TO CHANGE THE WRITES

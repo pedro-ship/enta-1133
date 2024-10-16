@@ -76,6 +76,10 @@ namespace GD12_1133_A2_PedroMelo.Scripts {
             itemFound = item.ItemName; // Assign RandomItem().ItemName to itemFound
         }
 
+        public void RemoveItemOfInventory(Item item) {
+            InventoryList.Remove(item);
+        }
+
         // Function CheckInventory
         public void CheckInventory() {
             // If InventoryList has one item or more run the code
